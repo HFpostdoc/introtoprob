@@ -1,0 +1,52 @@
+---
+title: "Introduction to Probability - Chapter 2"
+output: html_notebook
+---
+
+## Simulating the frequentist interpretation
+According to the frequentist interpretation of probability, $P(A|B) = \frac{n_{AB}}{n_B}$, where $n_{AB}$ is the number of times A and B events happen together, $n_B$ is the number of times that event B happens.
+
+*Elder is a girl vs. at least one girl*: A family has two children. What is the probability of having both girl, given the elder is a girl? What is the probability of having both girl, given at least one is a girl?
+
+*Solution*: Let G: girl, B: boy then our sample space is $\{GG, GB,BG,BB\}$. 
+
+P(both girl | elder is a girl) = P(both girls, elder is a girl)/ P(elder is girl) = (1/4)/(2/4) = 1/2.
+
+P(both girl | at least one girl) = P(both girls, at least one girl) / P(at least one girl) = (1/4)/(3/4) = 1/3.
+
+Let's confirm the above analysis using simulation. First let us prepare some data.
+```{r}
+n = 10^5; # number of families
+child1 = sample(2, n, replace = TRUE); # first child gender 1: girl, 2: boy
+child2 = sample(2, n, replace = TRUE) 
+```
+
+Let's compute P(both girl | elder is a girl)
+```{r}
+n.b = sum(child1 == 1)
+n.ab = sum(child1 == 1 & child2 == 1)
+cat(n.ab/n.b)
+```
+So it confirms our theorical analysis, i.e., the simulation result is very close to 1/2. What about P(both girl | at least one girl)
+
+```{r}
+n.b = sum(child1 == 1 | child2 == 1)
+n.ab = sum(child1 == 1 & child2 == 1)
+cat(n.ab/n.b)
+```
+
+Again the simulation result is close to our theoritical analysis.
+
+
+## Monty Hall simulation (Conditioning as a problem-solving tool)
+This is a game show, hosted by Monty. There are 3 doors and behind them there are 2 cows and 1 car.
+The contesant choose 1 door. Monty then pick a door randomly with equal probability but he will never reveal the car. Monty then offers the contestant a chance to change his mind and pick another door. Should the contestant change the door if his/her aim is to get the car.
+
+The user should adopt switch strategy since if he switches P(get car) = 2/3. The intuition is that if we imagine playing this game for 1000 times. Typically 333 times your intial guess will be correct. So if you adopt switch-strategy you will get the car the other 667 times. Let's simulate it
+
+```{r}
+n = 10^5 # number of playing times
+cardoor = sample(3, n, replace = TRUE) # the door that the car is be behind
+cat(sum(cardoor == 1)/n) 
+```
+Here we assume that the contestant always pick the door 1. This is reasonable since we can always rename the door. The result so that P(get a car if never switch) = 1/3
