@@ -271,19 +271,19 @@ sample(10,5) # without replacement</code></pre>
 <p>The probabilty of winning the game is <span class="math inline">\(1 - \frac{1}{e}\)</span>. Let us show by simulation that this is true.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubiA9IDEwMDtcbnIgPSByZXBsaWNhdGUoMTBeNCwgc3VtKHNhbXBsZShuKSA9PSAoMTpuKSkpO1xuc3VtKHI+PTEpLzEwXjRcbmBgYCJ9 -->
-<pre class="r"><code>n = 100;
-r = replicate(10^4, sum(sample(n) == (1:n)));
-sum(r&gt;=1)/10^4</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubiA9IDEwMDsgIyBudW1iZXIgb2YgY2FyZHNcbnIgPSByZXBsaWNhdGUoMTBeNCwgc3VtKHNhbXBsZShuKSA9PSAoMTpuKSkpOyAjIHNodWZmbGUgYW5kIGNvdW50IHRoZSBjYXJkcyBmb3IgMTAsMDAwIHRpbWVzXG5zdW0ocj49MSkvMTBeNDsgIyBjb21wdXRlIHRoZSBlbXBpcmljYWwgcHJvYmFiaWxpdHkgb2Ygd2lubmluZ1xuYGBgIn0= -->
+<pre class="r"><code>n = 100; # number of cards
+r = replicate(10^4, sum(sample(n) == (1:n))); # shuffle and count the cards for 10,000 times
+sum(r&gt;=1)/10^4; # compute the empirical probability of winning</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuNjMzOVxuIn0= -->
-<pre><code>[1] 0.6339</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuNjMxN1xuIn0= -->
+<pre><code>[1] 0.6317</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoJzEgLSAxL2U9Jyk7XG5gYGAifQ== -->
-<pre class="r"><code>print('1 - 1/e=');</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2F0KCcxIC0gMS9lPScsIDEtMS9leHAoMSkpO1xuYGBgIn0= -->
+<pre class="r"><code>cat('1 - 1/e=', 1-1/exp(1));</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiMSAtIDEvZT1cIlxuIn0= -->
-<pre><code>[1] &quot;1 - 1/e=&quot;</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiMSAtIDEvZT0gMC42MzIxMjA2XG4ifQ== -->
+<pre><code>1 - 1/e= 0.6321206</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoMS0xL2V4cCgxKSk7XG5gYGAifQ== -->
 <pre class="r"><code>print(1-1/exp(1));</code></pre>
@@ -291,12 +291,18 @@ sum(r&gt;=1)/10^4</code></pre>
 <!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuNjMyMTIwNlxuIn0= -->
 <pre><code>[1] 0.6321206</code></pre>
 <!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2F0KDEsIDIpXG5gYGAifQ== -->
+<pre class="r"><code>cat(1, 2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiMSAyXG4ifQ== -->
+<pre><code>1 2</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSW50cm9kdWN0aW9uIHRvIFByb2JhYmlsaXR5IC0gQ2hhcHRlciAxIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyBWZWN0b3JzCkhvdyB0byBjcmVhdGUgdmVjdG9ycwpgYGB7cn0KIyBjcmVhdGUgdmVjdG9ycwp2ID0gYygzLDEsNCwxLDUsOSkKc3VtKHYpCm1heCh2KQpsZW5ndGgodikKYGBgCkhvdyB0byBhY2Nlc3MgYSB2ZWN0b3JzCmBgYHtyfQp2WzJdCnZbYygxLDMpXQp2Wy0oMjo0KV0KYGBgCgpBIGxvdCBvZiBSIG9wZXJhdGlvbnMgYXJlIGludGVycHJldGVkIGVsZW1lbnQtd2lzZS4gRm9yIGV4YW1wbGUgJCQoMSwgXGZyYWN7MX17Ml4yfSwgXGRvdHMsIFxmcmFjezF9ezEwMF4yfSkkJCBjb3VsZCBiZSBnZW5lcmF0ZWQgYXMgZm9sbG93cy4KYGBge3J9CjEvKDE6MTAwKV4yCmBgYAoKIyMgRmFjdG9yaWFscyBhbmQgYmlub21pYWwgY29lZmZpY2llbnRzCgpGYWN0b3JpYWwgaXMgY29tcHV0ZWQgdXNpbmcgYGBgZmFjdG9yaWFsKG4pYGBgIGFuZCAkJG4gXGNob29zZSBrJCQgaXMgY29tcHV0ZWQgdXNpbmcgYGBgY2hvb3NlKG4saylgYGAuIFRoZXNlIGZ1bmN0aW9ucyBhbHNvIGhhdmUgbG9nYXJpdGhtaWMgY291bnRlcnBhcnRzIGBgYGxmYWN0b3JpYWwobilgYGAgYW5kIGBgYGxjaG9vc2UobixrKWBgYAoKIyMgU2FtcGxpbmcgYW5kIHNpbXVsYXRpb24KCmBgYHNhbXBsZWBgYCBjb21tYW5kIGlzIHVzZWQgdG8gZHJhdyBhIHJhbmRvbSBzYW1wbGUuIEZvciBleGFtcGxlIApgYGB7cn0KbiA9IDEwCmsgPSA1CnNhbXBsZSgxMCw1KSAjIHdpdGhvdXQgcmVwbGFjZW1lbnQKc2FtcGxlKDEwLDUsIHJlcGxhY2UgPSBUUlVFKSAjIHdpdGggcmVwbGFjZW1lbnQKYGBgCkhlbmNlIHRvIGdlbmVyYXRlIGEgcmFuZG9tIHBlcm11dGF0aW9uIG9mICRuJCBudW1iZXJzIHdlIGNhbiB1c2UgYGBgc2FtcGxlKG4sbilgYGAgb3IsIGVxdWl2YWxlbnRseSwgYGBgc2FtcGxlKG4pYGBgCmBgYHtyfQpzYW1wbGUoMTAsMTApCnNhbXBsZSgxMCkKYGBgCgpgYGB7cn0Kc2FtcGxlKGxldHRlcnMsIDcsIHJlcGxhY2UgPSBUUlVFKQpzYW1wbGUoNCwzLCByZXBsYWNlID0gVFJVRSwgcHJvYiA9IGMoMC4xLDAuMiwwLjMsMC40KSkKYGBgCgojIyBQcm9ibGVtIFNpbXVsYXRpb24KClIgcHJvdmlkZXMgZnVuY3Rpb25zIHRoYXQgYWxsb3cgdXMgc2ltdWxhdGUgcHJvYmFiaWxpdHkgcHJvYmxlbXMuIEluIHRoaXMgc2VjdGlvbiB3ZSB3aWxsIGRlc2NyaWJlIE1hdGNoaW5nIHByb2JsZW0gc2ltdWxhdGlvbi4KCipkZSBtb250bW9ydCdzIG1hdGNoaW5nIHByb2JsZW0qOiBDb25zaWRlciBhIHdlbGwtc2h1ZmZsZWQgZGVjayBvZiBuIGNhcmRzLCBsYWJlbGVkIGZyb20gMSB0aHJvdWdoIG4uIFdoaWxlIHlvdSBhcmUgZmxpcHBpbmcgY2FyZHMgb25lIGJ5IG9uZSB5b3UgYW5kIHNheWluZyBvdXRsb3VkIHRoZSBudW1iZXIgZnJvbSAxIHRvIG4sIGlmIHRoZSBjYXJkJ3MgbGFiZWwgbWF0Y2hlcyB3aXRoIHRoZSBudW1iZXIgdGhlbiB5b3Ugd2luIHRoZSBnYW1lLiBXaGF0IGlzIHRoZSBwcm9iYWJpbGl0eSBvZiB3aW5uaW5nIHRoZSBnYW1lPwoKVGhlIHByb2JhYmlsdHkgb2Ygd2lubmluZyB0aGUgZ2FtZSBpcyAkMSAtIFxmcmFjezF9e2V9JC4gTGV0IHVzIHNob3cgYnkgc2ltdWxhdGlvbiB0aGF0IHRoaXMgaXMgdHJ1ZS4gCgpgYGB7cn0KbiA9IDEwMDsgIyBudW1iZXIgb2YgY2FyZHMKciA9IHJlcGxpY2F0ZSgxMF40LCBzdW0oc2FtcGxlKG4pID09ICgxOm4pKSk7ICMgc2h1ZmZsZSBhbmQgY291bnQgdGhlIGNhcmRzIGZvciAxMCwwMDAgdGltZXMKc3VtKHI+PTEpLzEwXjQ7ICMgY29tcHV0ZSB0aGUgZW1waXJpY2FsIHByb2JhYmlsaXR5IG9mIHdpbm5pbmcKcHJpbnQoJzEgLSAxL2U9Jyk7CnByaW50KDEtMS9leHAoMSkpOwpgYGAKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSW50cm9kdWN0aW9uIHRvIFByb2JhYmlsaXR5IC0gQ2hhcHRlciAxIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyBWZWN0b3JzCkhvdyB0byBjcmVhdGUgdmVjdG9ycwpgYGB7cn0KIyBjcmVhdGUgdmVjdG9ycwp2ID0gYygzLDEsNCwxLDUsOSkKc3VtKHYpCm1heCh2KQpsZW5ndGgodikKYGBgCkhvdyB0byBhY2Nlc3MgYSB2ZWN0b3JzCmBgYHtyfQp2WzJdCnZbYygxLDMpXQp2Wy0oMjo0KV0KYGBgCgpBIGxvdCBvZiBSIG9wZXJhdGlvbnMgYXJlIGludGVycHJldGVkIGVsZW1lbnQtd2lzZS4gRm9yIGV4YW1wbGUgJCQoMSwgXGZyYWN7MX17Ml4yfSwgXGRvdHMsIFxmcmFjezF9ezEwMF4yfSkkJCBjb3VsZCBiZSBnZW5lcmF0ZWQgYXMgZm9sbG93cy4KYGBge3J9CjEvKDE6MTAwKV4yCmBgYAoKIyMgRmFjdG9yaWFscyBhbmQgYmlub21pYWwgY29lZmZpY2llbnRzCgpGYWN0b3JpYWwgaXMgY29tcHV0ZWQgdXNpbmcgYGBgZmFjdG9yaWFsKG4pYGBgIGFuZCAkJG4gXGNob29zZSBrJCQgaXMgY29tcHV0ZWQgdXNpbmcgYGBgY2hvb3NlKG4saylgYGAuIFRoZXNlIGZ1bmN0aW9ucyBhbHNvIGhhdmUgbG9nYXJpdGhtaWMgY291bnRlcnBhcnRzIGBgYGxmYWN0b3JpYWwobilgYGAgYW5kIGBgYGxjaG9vc2UobixrKWBgYAoKIyMgU2FtcGxpbmcgYW5kIHNpbXVsYXRpb24KCmBgYHNhbXBsZWBgYCBjb21tYW5kIGlzIHVzZWQgdG8gZHJhdyBhIHJhbmRvbSBzYW1wbGUuIEZvciBleGFtcGxlIApgYGB7cn0KbiA9IDEwCmsgPSA1CnNhbXBsZSgxMCw1KSAjIHdpdGhvdXQgcmVwbGFjZW1lbnQKc2FtcGxlKDEwLDUsIHJlcGxhY2UgPSBUUlVFKSAjIHdpdGggcmVwbGFjZW1lbnQKYGBgCkhlbmNlIHRvIGdlbmVyYXRlIGEgcmFuZG9tIHBlcm11dGF0aW9uIG9mICRuJCBudW1iZXJzIHdlIGNhbiB1c2UgYGBgc2FtcGxlKG4sbilgYGAgb3IsIGVxdWl2YWxlbnRseSwgYGBgc2FtcGxlKG4pYGBgCmBgYHtyfQpzYW1wbGUoMTAsMTApCnNhbXBsZSgxMCkKYGBgCgpgYGB7cn0Kc2FtcGxlKGxldHRlcnMsIDcsIHJlcGxhY2UgPSBUUlVFKQpzYW1wbGUoNCwzLCByZXBsYWNlID0gVFJVRSwgcHJvYiA9IGMoMC4xLDAuMiwwLjMsMC40KSkKYGBgCgojIyBQcm9ibGVtIFNpbXVsYXRpb24KClIgcHJvdmlkZXMgZnVuY3Rpb25zIHRoYXQgYWxsb3cgdXMgc2ltdWxhdGUgcHJvYmFiaWxpdHkgcHJvYmxlbXMuIEluIHRoaXMgc2VjdGlvbiB3ZSB3aWxsIGRlc2NyaWJlIE1hdGNoaW5nIHByb2JsZW0gc2ltdWxhdGlvbi4KCipkZSBtb250bW9ydCdzIG1hdGNoaW5nIHByb2JsZW0qOiBDb25zaWRlciBhIHdlbGwtc2h1ZmZsZWQgZGVjayBvZiBuIGNhcmRzLCBsYWJlbGVkIGZyb20gMSB0aHJvdWdoIG4uIFdoaWxlIHlvdSBhcmUgZmxpcHBpbmcgY2FyZHMgb25lIGJ5IG9uZSB5b3UgYW5kIHNheWluZyBvdXRsb3VkIHRoZSBudW1iZXIgZnJvbSAxIHRvIG4sIGlmIHRoZSBjYXJkJ3MgbGFiZWwgbWF0Y2hlcyB3aXRoIHRoZSBudW1iZXIgdGhlbiB5b3Ugd2luIHRoZSBnYW1lLiBXaGF0IGlzIHRoZSBwcm9iYWJpbGl0eSBvZiB3aW5uaW5nIHRoZSBnYW1lPwoKVGhlIHByb2JhYmlsdHkgb2Ygd2lubmluZyB0aGUgZ2FtZSBpcyAkMSAtIFxmcmFjezF9e2V9JC4gTGV0IHVzIHNob3cgYnkgc2ltdWxhdGlvbiB0aGF0IHRoaXMgaXMgdHJ1ZS4gCgpgYGB7cn0KbiA9IDEwMDsgIyBudW1iZXIgb2YgY2FyZHMKciA9IHJlcGxpY2F0ZSgxMF40LCBzdW0oc2FtcGxlKG4pID09ICgxOm4pKSk7ICMgc2h1ZmZsZSBhbmQgY291bnQgdGhlIGNhcmRzIGZvciAxMCwwMDAgdGltZXMKc3VtKHI+PTEpLzEwXjQ7ICMgY29tcHV0ZSB0aGUgZW1waXJpY2FsIHByb2JhYmlsaXR5IG9mIHdpbm5pbmcKY2F0KCcxIC0gMS9lPScsIDEtMS9leHAoMSkpOwpwcmludCgxLTEvZXhwKDEpKTsKCmBgYAoK</div>
 
 
 
