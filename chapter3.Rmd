@@ -1,0 +1,43 @@
+---
+title: Introduction to Probability - Chapter 3
+output: html_notebook
+---
+
+This chapter deal with random variables and their distributions. 
+
+- A random variable is a function that map every possible outcomes to a real number.
+- A distribution of a random variable is a full specification of probabilities for events associated with X such as $\{X = 4\}$ or $\{ -122 \leq X \leq 10\}$.
+- The probability mass function (pmf) of X is a function that map X to a nonnegative real number: $pmf: X \rightarrow \mathbb{R}$. 
+- The cummulative distribution function (cmf) of X is defined as $cmf(x) = P(X \leq x)$.
+
+This chapter describe four named distributions:
+
+- Bernoulli Bern(p): a Bernoulli r.v. is an indicator of sucess in a Bernoulli trial with probability of success p.
+- Binomial Bin(n,p): a Binomial r.v. is the number of sucesses in n Bernoulli trials sharing the same probability of success p.
+- Hyptergeometric HGeom(w,b,n): a Hypergeometric r.v. is the number of white balls in n balls withdrawn (without replacment) from an urn that contain w whiteballs and b blackballs.
+- Discrete Uniform DUnif(C): a discrete uniform r.v. is obtained by choosing randomly an element from a set C. Each element has the same probability of being selected.
+
+Let's do some R code for each of the previous distribution.
+
+### Bernoulli - Bern(p)
+- ```dbinom(x, n, p)``` is the pmf of a binomial r.v. Hence, ```dbinom(1,1,p)``` can represent Bern(p).
+- ```pbinom(x,n,p``` is the cmf of a binomial r.v.
+- ```rbinom(m, n,p``` generate m binomial random variables
+```{r}
+# X ~ Bin(5,0.2)
+dbinom(3,5,0.2) # P(X = 3)
+pbinom(3,5,0.2)
+rbinom(8,5,0.2)
+```
+### Hypergeometric distribution
+We have ```dhyper(), phyper(), rhyper()``` as density function (pmf), distribution function (cmf), generating r.v.s function, respectively.
+```{r}
+dhyper(2,20,11,3)
+```
+### Discrete distributions with finite support
+What if we want to construct a r.v. X that has the following pmf: $$P(X = 0) = 0.25,\\ P(X=1) = 0.5,\\P(X=5)=0.1,P(X=10)=0.15,\\P(X=x)=0, \text{for all other values of x}$$. And we want to construct one hunderd i.i.d r.v.s $X_{i}$. This is how we do it.
+```{r}
+x = c(0,1,5,10)
+p = c(0.25,0.5,0.1,0.5)
+sample(x,100, prob=p,replace=TRUE)
+```
