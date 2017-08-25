@@ -1,0 +1,42 @@
+---
+title: "Introduction to Probability - Chapter 4 Expectation"
+output: html_notebook
+---
+This chapter deal with the expectation of a r.v. The expectation of a r.v. X is $$E(X) = \sum_{x}{xP(X=x)}$$. An expectation is a single number that summarize the center of mass of a distribution.
+
+To measure the spread of a probability distribution, we have the variance defined by $$Var(X) = E(X - E(X))^2 = E(X^2) = (EX)^2$$. The square root of a variance is called the standard deviation.
+
+Properties of expectation:
+
+ - E(X + Y) = E(X) + E(Y)
+ - E(cX) = cE(X)
+
+Properties of variance:
+
+ - $Var(cX) = c^2Var(X)$
+ - $Var(X + Y) \neq Var(X) + Var(Y)$, in general except when X and Y are indenpendent.
+ 
+###Geometric, Neagive Binomial, and Poisson
+
+####Geometric
+A Geom(p) r.v. is the number of failures before the first success in a squence of independent Bernoulli trial with probability of success p. Hence if $X\sim Geom(p)$ then $$P(X = k) = q^kp$$, where $q = 1- p$. This is valid pmf since $$\sum_{0}^{\infty}q^kp=p\sum_{0}^{\infty}q^k=p\frac{1}{1-q}=p\frac{1}{p}=1 \quad \text{(the second equation is due to Geometric series)}$$
+
+
+Again we have for Geometric distribution 3 functions ```dgeom, pgeom, rgeom``` that corresponds to pmf, cmf, and random number generator. So if $X \sim Geom(0.5)$
+```{r}
+dgeom(3, p=0.5)
+pgeom(3, p=0.5)
+rgeom(10,0.5)
+```
+
+####Negaive Binomial
+A negative binomial r.v. is the number of failures before the rth success in a squence of indepedent Bernoulli trials: $X \sim NBin(r,p)$. Its pmf is as follows. $$P(X = n) = {n + r - 1 \choose r -1}p^rq^n$$, here $n + r - 1 \choose r - 1$ is the number of ways to choose $r-1$ success trials from the previous (n + r - 1) trials; The last trial is a success one.
+
+In R, we have ```dnbinom, pnbinom, rnbinom```. For example, the probability of 3 failures before the 5th success in a sequence of independent Bernoulli trials.
+```{r}
+dnbinom(3,5,0.5) # probability of 3 failures before the 5th success
+```
+
+
+####Poisson
+We have ```dpois, ppois, rpois```
