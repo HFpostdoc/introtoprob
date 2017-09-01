@@ -1,0 +1,65 @@
+---
+title: "Introduction to Probability - Chapter 5 Continous Random Variables"
+output: html_notebook
+---
+
+A continous r.v. has a differentiable cdf and the derivative is called the probability density function (pdf). Here, the probability is represented as area under the curve. Hence the probability of X falling in some range is equal to the integral of pmf on this range.
+
+Some interesting formulars.
+
+- $E(X) = \int_{-\infty}^{\infty}xf(x)dx$
+- $E(g(X)) = \int_{-\infty}^{\infty}g(x)f(x)dx$
+
+
+There are three important continous distributions: Uniform, Normal, and Exponential, and Poisson process.
+
+An Unif(a,b) is a r.v. is a random number between a and b. The probability of its falling in to $[c,d] \subset [a,b]$ is proportional to the length of $[c,d]$.
+
+A $\mathcal{N}(\mu,\sigma^2)$ r.v. has a symmetric bell curved PDF centered at $\mu$ with $\sigma$ controls how spreads out the curve is
+
+An $Expo(\lambda)$ r.v. represents the waiting time for the first success in continuous time. This is similar to a Geometric r.v. 
+
+A Poisson process is a sequence of arrivals in continous time such that the number of arrivals in an interval of fixed length follows a Poisson distribution.
+
+###Uniform distribution
+The pdf of uniform distribution of r.v. X on an interval $[a,b]$ is defined as follows. 
+
+$$f(x) = \begin{cases}
+  \frac{1}{b-a}& \text{   if a < x < b,}\\
+  0 &\text{   otherwise}
+\end{cases}
+$$We again have three functions ```dunif, punif, runif```.
+```{r}
+# pdf function
+dunif(3,3,6) # 0.3333
+
+# cdf function
+punif(5,3,6)
+
+# generate 4 random uniform variables
+runif(4,3,6)
+```
+###Plots in R
+We can use ```curve``` to plot a function
+```{r}
+#mysquare = function(x) {
+#  x^2;
+#}
+#curve(mysquare, from=-3, to=3, n=1000)
+curve(dnorm, from=-3, to=3, n=1000)
+
+curve(dnorm, from=-3, to=3, n=10)
+
+```
+
+Another function is ```plot```.
+```{r}
+x = seq(-3,3,0.01)
+y = dnorm(x)
+plot(x,y,type = "l", main = "Standard Normal PDF", col = 'red') # "l" stands for line plot. The default is scatter plot
+
+y = dunif(x,-3,3)
+plot(x,y, type = "l")
+```
+
+###Universality with Logistic
